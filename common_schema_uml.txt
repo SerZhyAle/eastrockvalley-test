@@ -1,0 +1,19 @@
+@startuml
+title EastRockValley-test
+
+left to right direction
+
+package AWS{
+ rectangle "AWS MWAA AirFlow"
+ database "AWS RDS MySQL8"
+ rectangle "AWS EC2 Metabase"
+ storage "AWS S3 csv"
+ storage "AWS S3 settings"
+}
+
+"AWS S3 csv" --|> "AWS MWAA AirFlow"
+"AWS S3 settings" --|> "AWS MWAA AirFlow"
+"AWS MWAA AirFlow" --> "AWS RDS MySQL8"
+"AWS RDS MySQL8" --> "AWS EC2 Metabase"
+
+@enduml

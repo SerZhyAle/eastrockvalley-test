@@ -1,0 +1,55 @@
+@startuml
+title EastRockValley MySQL PRESENTATION
+
+left to right direction
+
+package Gear{
+ rectangle recent_changes
+}
+
+package Vault{
+ rectangle h_games
+ rectangle h_game_types
+ rectangle h_countries
+ rectangle h_users
+ '  rectangle calendar_dates
+ '  rectangle l_users_games_dates
+ '  rectangle s_users_games_dates
+ rectangle payments_vault
+}
+
+package Bus{
+package Daily{
+rectangle "daily_countries"
+rectangle "daily_game_types"
+rectangle "daily_games"
+rectangle "daily_users"
+rectangle "daily_payments"
+}
+package Total{
+rectangle "total_countries"
+rectangle "total_game_types"
+rectangle "total_games"
+rectangle "total_payments"
+rectangle "total_users"
+}
+}
+
+h_countries --|> "daily_countries"
+'  s_users_games_dates -- "daily_countries"
+'  payments_vault -- "daily_countries"
+h_countries --|> "total_countries"
+h_users --|> "daily_users"
+'  s_users_games_dates -- "daily_users"
+'  payments_vault -- "daily_users"
+h_users --|> "total_users"
+h_game_types --|> "daily_game_types"
+'  s_users_games_dates -- "daily_game_types"
+h_game_types --|> "total_game_types"
+h_games --|> "daily_games"
+'  s_users_games_dates -- "daily_games"
+h_games --|> "total_games"
+payments_vault --|> "daily_payments"
+payments_vault --|> "total_payments"
+
+@enduml

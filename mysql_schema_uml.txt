@@ -1,0 +1,20 @@
+@startuml
+title EastRockValley-MySQL-8
+
+left to right direction
+
+package MySQL{
+ rectangle Staging
+ database DataVault
+ rectangle Gear
+ storage Bulk
+ storage BUS
+}
+
+"AWS MWAA AirFlow" --|> Staging
+Staging --|> DataVault
+Staging --|> Bulk
+DataVault --> BUS
+BUS --> "AWS EC2 Metabase"
+
+@enduml

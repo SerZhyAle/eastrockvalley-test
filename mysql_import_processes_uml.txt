@@ -1,0 +1,61 @@
+@startuml
+title EastRockValley MySQL IMPORT
+
+left to right direction
+
+package Staging{
+ rectangle games
+ rectangle users
+ rectangle payments 
+}
+
+package Bulk{
+ rectangle processed_games
+ rectangle processed_users
+ rectangle processed_payments 
+}
+
+package Gear{
+ rectangle temp_games
+ rectangle recent_changes
+}
+
+package Vault{
+ rectangle h_games
+ rectangle h_game_types
+ rectangle h_countries
+ rectangle h_users
+ rectangle calendar_dates
+ rectangle l_users_games_dates
+ rectangle s_users_games_dates
+ rectangle payments_vault
+}
+
+users --|> h_countries
+users --|> h_users
+h_countries -- h_users
+
+games --|> h_game_types
+games --|> h_games
+h_game_types -- h_games
+
+games --|> recent_changes
+games --|> temp_games
+
+temp_games --|> l_users_games_dates
+temp_games --|> s_users_games_dates
+h_games -- l_users_games_dates
+h_users -- l_users_games_dates
+calendar_dates -- l_users_games_dates
+
+l_users_games_dates - s_users_games_dates
+
+payments --|> recent_changes
+payments --|> payments_vault
+h_users -- payments_vault
+
+users --|> processed_users
+games --|> processed_games
+payments --|> processed_payments
+
+@enduml

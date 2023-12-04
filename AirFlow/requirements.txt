@@ -1,0 +1,6 @@
+pandas==2.1.1
+pandas-ta==0.3.14b
+cython==0.29.21
+pandas-gbq==0.19.2
+boto3==1.28.17
+apache-airflow-providers-mysql==5.3.1
